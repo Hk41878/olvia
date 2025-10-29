@@ -176,6 +176,99 @@
     }
     .copy:active{ transform: scale(.98) }
     .hint{ font-size:12px; color:var(--muted); margin-left:6px }
+  
+  /* Eye-catching golden CTA with shimmer wave */
+.btn-home{
+  --gold-1:#ffcf40;
+  --gold-2:#ffc107;
+  --gold-3:#f59e0b;
+  --gold-4:#b45309;
+  --text:#1a1a1a;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  text-decoration: none;
+  font: 800 14px/1.1 Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  letter-spacing: .3px;
+  color: var(--text);
+  background-image: linear-gradient(135deg, var(--gold-1), var(--gold-2) 40%, var(--gold-3) 70%, var(--gold-4));
+  box-shadow:
+    0 10px 24px rgba(0,0,0,.25),
+    inset 0 1px 0 rgba(255,255,255,.65),
+    inset 0 -1px 0 rgba(0,0,0,.15);
+  border: 1px solid rgba(0,0,0,.15);
+  transform: translateZ(0);
+  overflow: hidden;
+  isolation: isolate; /* keeps shimmer inside */
+  transition: transform .12s ease, filter .2s ease, box-shadow .2s ease;
+}
+
+.btn-home:hover{ transform: translateY(-1px); filter: saturate(1.05) }
+.btn-home:active{ transform: translateY(0) scale(.98) }
+
+.btn-home:focus-visible{
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.45),
+    0 10px 24px rgba(0,0,0,.25),
+    inset 0 1px 0 rgba(255,255,255,.65);
+}
+
+/* Label styling (optional small shine on hover) */
+.btn-home__label{
+  position: relative;
+  z-index: 2;
+  white-space: nowrap;
+  text-shadow: 0 1px 0 rgba(255,255,255,.35);
+}
+
+/* Shimmer wave */
+.btn-home::after{
+  content:"";
+  position:absolute;
+  inset:-40%;
+  left:-150%;
+  width:60%;
+  transform: skewX(-25deg);
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,.4) 50%,
+    rgba(255,255,255,0) 100%
+  );
+  filter: blur(2px);
+  z-index:1;
+  animation: shimmer 2.1s linear infinite;
+}
+
+@keyframes shimmer{
+  0%   { left: -150%; }
+  100% { left: 160%; }
+}
+
+/* Subtle ambient glow pulsing */
+@keyframes glow {
+  0%,100% { box-shadow: 0 10px 24px rgba(0,0,0,.25), 0 0 0 rgba(255,193,7,0); }
+  50%     { box-shadow: 0 12px 28px rgba(0,0,0,.28), 0 0 24px rgba(255,193,7,.35); }
+}
+.btn-home{ animation: glow 3.2s ease-in-out infinite }
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .btn-home,
+  .btn-home::after{ animation: none }
+  .btn-home{ transition: none }
+}
+
+/* Optional: tighter spacing on small screens */
+@media (max-width:480px){
+  .btn-home{ padding: 11px 16px; font-size: 13.5px }
+}
+  
   </style>
 </head>
 <body>
@@ -185,6 +278,11 @@
     <main class="card" role="main">
       <div class="badge" aria-label="status">🚀 Premium Domain • For Sale</div>
       <h1 class="domain" aria-label="domain name">olvia<span style="color:var(--accent)">.it</span></h1>
+<!-- Place this right after your domain title, e.g. after <h1 class="domain">... -->
+<a class="btn-home" href="home/index.html" aria-label="Go to Home Page">
+  <span class="btn-home__label">Go Home Page</span>
+</a>
+      
       <p class="tagline">Short. Brandable. Memorable. Ideal for Italian brands, fashion, lifestyle, tech, or media.</p>
 
       <div class="grid">
