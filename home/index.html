@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CAF Olvia</title>
+  <meta name="description" content="CAF Olvia: servizi fiscali e di patronato. 730, ISEE, NASpI, IMU, F24, Redditi e altro.">
+  <style>
+    /* ====== Base (simple & professional) ====== */
+    :root{
+      --bg:#ffffff;
+      --text:#0c1116;
+      --muted:#5b6672;
+      --line:#e6e8eb;
+      --brand:#0b74ff;
+      --brand-2:#0a5ed8;
+      --chip:#f5f7fa;
+      --ok:#0a974b;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;background:var(--bg);color:var(--text);font:16px/1.55 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+    a{color:var(--brand);text-decoration:none}
+    .wrap{max-width:1100px;margin:auto;padding:0 16px}
+    /* ====== Navbar ====== */
+    .nav{
+      position:sticky;top:0;z-index:20;background:rgba(255,255,255,.9);
+      backdrop-filter:saturate(1.2) blur(8px);border-bottom:1px solid var(--line);
+    }
+    .nav-inner{display:flex;align-items:center;justify-content:space-between;height:60px}
+    .brand{display:flex;align-items:center;gap:10px;font-weight:800}
+    .brand-mark{width:28px;height:28px;border-radius:6px;background:linear-gradient(135deg,var(--brand),var(--brand-2))}
+    .hamb{border:none;background:#fff;border:1px solid var(--line);width:40px;height:40px;border-radius:8px;cursor:pointer}
+    .hamb:after{content:"≡";font-size:21px;color:var(--text)}
+    /* Drawer */
+    .drawer{
+      position:fixed;inset:60px 0 auto auto;width:min(360px,94vw);background:#fff;border-left:1px solid var(--line);
+      box-shadow:0 10px 30px rgba(0,0,0,.08);transform:translateX(100%);transition:.25s;
+      display:flex;flex-direction:column;gap:12px;padding:18px;z-index:30
+    }
+    .drawer.open{transform:translateX(0)}
+    .drawer h3{margin:0 0 6px}
+    .pair{display:grid;grid-template-columns:96px 1fr;gap:4px 8px}
+    .muted{color:var(--muted)}
+    /* ====== Hero ====== */
+    .hero{padding:26px 0;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fafcff,#fff)}
+    .hero h1{margin:6px 0 6px;font-size:clamp(22px,4vw,34px)}
+    .hero p{margin:0;color:var(--muted)}
+    .cta{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+    .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--text);cursor:pointer}
+    .btn.primary{background:linear-gradient(180deg,var(--brand),var(--brand-2));color:#fff;border-color:var(--brand-2)}
+    /* ====== Services grid ====== */
+    .section{padding:24px 0}
+    .section h2{margin:0 0 10px;font-size:clamp(18px,3vw,24px)}
+    .grid{display:grid;grid-template-columns:1fr;gap:12px}
+    @media(min-width:760px){.grid{grid-template-columns:repeat(2,1fr)}}
+    @media(min-width:1024px){.grid{grid-template-columns:repeat(3,1fr)}}
+    .card{border:1px solid var(--line);border-radius:12px;padding:14px;background:#fff;display:flex;flex-direction:column;gap:8px}
+    .card h3{margin:0;font-size:17px}
+    .card small{color:var(--muted)}
+    .card .actions{margin-top:auto}
+    .chip{display:inline-flex;align-items:center;gap:6px;background:var(--chip);border:1px solid var(--line);padding:6px 10px;border-radius:999px;font-size:12px;color:var(--muted)}
+    /* ====== Detail & Form ====== */
+    .detail{border:1px solid var(--line);border-radius:14px;padding:16px;margin-top:14px;display:none}
+    .detail.show{display:block}
+    .detail h3{margin:0 0 6px}
+    .docs{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 0}
+    .hr{height:1px;background:var(--line);margin:14px 0}
+    form{display:none}
+    form.show{display:grid;gap:10px}
+    input,select,textarea{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:#fff}
+    label{font-size:14px;color:var(--muted)}
+    .two{display:grid;grid-template-columns:1fr;gap:10px}
+    @media(min-width:680px){.two{grid-template-columns:1fr 1fr}}
+    .note{font-size:12px;color:var(--muted)}
+    .ok{color:var(--ok)}
+    /* ====== Footer ====== */
+    footer{border-top:1px solid var(--line);padding:16px 0;color:var(--muted);font-size:14px}
+  </style>
+</head>
+<body>
+  <!-- ====== Navbar ====== -->
+  <nav class="nav">
+    <div class="wrap nav-inner">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true"></div>
+        <div>CAF Olvia</div>
+      </div>
+      <button class="hamb" id="open-drawer" aria-label="Apri contatti"></button>
+    </div>
+  </nav>
+
+  <!-- Drawer contacts -->
+  <aside class="drawer" id="drawer" aria-hidden="true" aria-label="Contatti">
+    <h3>Contatti</h3>
+    <div class="pair">
+      <div class="muted">Telefono</div><div>+39 331 902 1033</div>
+      <div class="muted">WhatsApp</div><div><a href="https://wa.me/393319021033" target="_blank" rel="noopener">Chatta ora</a></div>
+      <div class="muted">Email</div><div><a href="mailto:hk41878@gmail.com">hk41878@gmail.com</a></div>
+    </div>
+    <div class="hr"></div>
+    <h3>Orari</h3>
+    <div class="pair">
+      <div class="muted">Lun–Ven</div><div>08:30–13:30 · 16:30–19:30</div>
+      <div class="muted">Sab/Dom</div><div>Chiuso</div>
+    </div>
+  </aside>
+
+  <!-- ====== Hero ====== -->
+  <header class="hero">
+    <div class="wrap">
+      <h1>CAF Olvia — servizi fiscali e ISEE senza complicazioni</h1>
+      <p>Seleziona un servizio per leggere la descrizione e inviare una richiesta rapida via WhatsApp o Email.</p>
+      <div class="cta">
+        <a class="btn primary" href="#servizi">Vai ai servizi</a>
+        <button class="btn" id="btn-whatsapp" onclick="window.open('https://wa.me/393319021033','_blank','noopener')">Apri WhatsApp</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ====== Services ====== -->
+  <main class="wrap section" id="servizi">
+    <h2>Servizi principali</h2>
+    <div class="grid" id="service-grid"></div>
+
+    <!-- Detail + Form (hidden until a service is chosen) -->
+    <section class="detail" id="detail">
+      <h3 id="detail-title">—</h3>
+      <p id="detail-desc" class="muted"></p>
+      <div class="docs" id="detail-docs"></div>
+
+      <div class="hr"></div>
+      <form id="request-form" novalidate>
+        <div class="two">
+          <div>
+            <label for="fullname">Nome e Cognome *</label>
+            <input id="fullname" placeholder="Es. Mario Rossi" autocomplete="name" required>
+          </div>
+          <div>
+            <label for="email">Email (opzionale)</label>
+            <input id="email" type="email" placeholder="mario.rossi@email.it" autocomplete="email">
+          </div>
+        </div>
+        <div class="two">
+          <div>
+            <label for="channel">Invia tramite</label>
+            <select id="channel">
+              <option value="whatsapp">WhatsApp</option>
+              <option value="email">Email</option>
+            </select>
+          </div>
+          <div>
+            <label for="notes">Note (opzionali)</label>
+            <input id="notes" placeholder="Breve nota o urgenza">
+          </div>
+        </div>
+        <label><input type="checkbox" id="privacy"> Ho letto l’informativa privacy e acconsento al trattamento dei dati.</label>
+        <div class="two">
+          <button type="button" class="btn primary" id="send">Invia richiesta</button>
+          <button type="button" class="btn" id="preview">Anteprima</button>
+        </div>
+        <div class="note">Il messaggio viene inviato a +39 331 902 1033 (WhatsApp) oppure a hk41878@gmail.com.</div>
+        <div id="status" class="ok"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">© <span id="year"></span> CAF Olvia • Privacy & Cookie • Inserisci indirizzo quando disponibile.</div>
+  </footer>
+
+  <script>
+    // ====== Data ======
+    const SERVICES = [
+      {id:"730", name:"Modello 730", short:"Dipendenti e pensionati", desc:"Compilazione e invio del Modello 730 con controllo detrazioni (spese sanitarie, mutui, istruzione, affitti), conguagli e assistenza post-invio.", docs:["Documento d'identità e CF","CU / Certificazione Unica","Spese detraibili (ricevute)","Contratto affitto o mutuo (se presenti)"]},
+      {id:"isee", name:"ISEE / DSU", short:"Ordinario, Universitario, Minorenni, Corrente", desc:"Acquisizione DSU (anche precompilata) e rilascio attestazione per bonus e agevolazioni.", docs:["Documento d'identità e CF (familiari)","Redditi e patrimoni (conti, immobili)","Contratto locazione (se in affitto)"]},
+      {id:"naspi", name:"NASpI", short:"Indennità di disoccupazione", desc:"Verifica requisiti e invio domanda NASpI, con supporto su obblighi durante la prestazione e variazioni.", docs:["Documento d'identità e CF","Dati ultimo rapporto di lavoro","IBAN","DID (se disponibile)"]},
+      {id:"imu", name:"IMU", short:"Calcolo e F24", desc:"Calcolo IMU con stampa o invio telematico F24. Assistenza su ravvedimento operoso e scadenze.", docs:["Visure/rendita catastale","Quote e dati di possesso","Pertinenze (se presenti)"]},
+      {id:"f24", name:"F24 / Compensazioni", short:"Pagamenti tributi", desc:"Predisposizione F24 per imposte e tributi locali con eventuali compensazioni crediti e invio telematico.", docs:["Deleghe F24 precedenti","Dettaglio tributi da versare"]},
+      {id:"redditi", name:"Redditi Persone Fisiche", short:"Ex Unico", desc:"Dichiarazione dei redditi per casistiche non coperte dal 730 (autonomi senza P.IVA, redditi esteri, locazioni, plusvalenze).", docs:["Documento d'identità e CF","Quadri reddituali","Documenti redditi diversi"]},
+      {id:"precomp", name:"Dichiarazione Precompilata", short:"Accesso e invio", desc:"Accesso all’area Precompilata, verifica/correzione dati e invio sicuro con delega.", docs:["SPID/CIE/Deleghe","Documenti a supporto correzioni"]},
+      {id:"visure", name:"Visure catastali", short:"Rendite e terreni", desc:"Richiesta e lettura visure catastali per verifiche su rendite e intestazioni.", docs:["Dati catastali o Codice Fiscale"]},
+      {id:"riscossione", name:"Cartelle/Rateazioni", short:"Agenzia Entrate-Riscossione", desc:"Assistenza su cartelle, piani di rateazione, istanze di sospensione e verifiche.", docs:["Atto ricevuto","Comunicazioni pregresse"]},
+      {id:"bonus", name:"Bonus con ISEE", short:"Agevolazioni", desc:"Presentazione domande per bonus e agevolazioni collegati a ISEE valido (bollette, nidi, mense).", docs:["ISEE in corso di validità","Dati fornitore/ente"]},
+    ];
+
+    // ====== DOM ======
+    const grid = document.getElementById('service-grid');
+    const detail = document.getElementById('detail');
+    const dTitle = document.getElementById('detail-title');
+    const dDesc  = document.getElementById('detail-desc');
+    const dDocs  = document.getElementById('detail-docs');
+    const form   = document.getElementById('request-form');
+    const fullname = document.getElementById('fullname');
+    const email = document.getElementById('email');
+    const channel = document.getElementById('channel');
+    const notes = document.getElementById('notes');
+    const privacy = document.getElementById('privacy');
+    const send = document.getElementById('send');
+    const preview = document.getElementById('preview');
+    const statusEl = document.getElementById('status');
+    const year = document.getElementById('year');
+    year.textContent = new Date().getFullYear();
+
+    // ====== Build Services Grid ======
+    let selected = null;
+    function buildGrid(){
+      grid.innerHTML = "";
+      SERVICES.forEach(s => {
+        const card = document.createElement('button');
+        card.className = "card";
+        card.type = "button";
+        card.innerHTML = `<h3>${s.name}</h3><small>${s.short}</small><div class="actions"><span class="chip">Seleziona</span></div>`;
+        card.addEventListener('click', ()=> selectService(s));
+        grid.appendChild(card);
+      });
+    }
+
+    function selectService(s){
+      selected = s;
+      // Fill detail
+      dTitle.textContent = s.name;
+      dDesc.textContent = s.desc;
+      dDocs.innerHTML = s.docs.map(x=> `<span class="chip">${x}</span>`).join(" ");
+      // Reveal detail and form
+      detail.classList.add('show');
+      form.classList.add('show');
+      // Reset form state
+      fullname.value = "";
+      email.value = "";
+      notes.value = "";
+      privacy.checked = false;
+      statusEl.textContent = "";
+      // Scroll into view on mobile
+      detail.scrollIntoView({behavior:"smooth", block:"start"});
+    }
+
+    // ====== Messaging ======
+    function buildMessage(){
+      if(!selected) return {ok:false, error:"Seleziona prima un servizio."};
+      const name = (fullname.value||"").trim();
+      if(!name) return {ok:false, error:"Inserisci nome e cognome."};
+      const mail = (email.value||"").trim();
+      const note = (notes.value||"").trim();
+      const parts = [
+        "Richiesta servizio - CAF Olvia",
+        `Servizio: ${selected.name}`,
+        `Richiedente: ${name}`,
+        mail ? `Email: ${mail}` : null,
+        note ? `Note: ${note}` : null
+      ].filter(Boolean);
+      return {ok:true, text:parts.join("\n")};
+    }
+
+    preview.addEventListener('click', ()=>{
+      const res = buildMessage();
+      if(!res.ok) return alert(res.error);
+      alert(res.text);
+    });
+
+    send.addEventListener('click', ()=>{
+      if(!privacy.checked){ return alert("Per procedere devi acconsentire al trattamento dei dati."); }
+      const res = buildMessage();
+      if(!res.ok) return alert(res.error);
+      const encoded = encodeURIComponent(res.text);
+      if(channel.value === 'whatsapp'){
+        window.open(`https://wa.me/393319021033?text=${encoded}`, "_blank", "noopener");
+      }else{
+        const subject = encodeURIComponent(`Richiesta Servizio - CAF Olvia - ${selected ? selected.name : ""}`);
+        window.location.href = `mailto:hk41878@gmail.com?subject=${subject}&body=${encoded}`;
+      }
+      statusEl.textContent = "Richiesta preparata: controlla l'app di invio.";
+      setTimeout(()=> statusEl.textContent = "", 3000);
+    });
+
+    // ====== Drawer ======
+    const drawer = document.getElementById('drawer');
+    const openBtn = document.getElementById('open-drawer');
+    openBtn.addEventListener('click', ()=>{
+      const isOpen = drawer.classList.toggle('open');
+      drawer.setAttribute('aria-hidden', (!isOpen).toString());
+    });
+
+    buildGrid();
+  </script>
+</body>
+</html>
