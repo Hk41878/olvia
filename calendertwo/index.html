@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calendar with Badges</title>
+<link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.css" rel="stylesheet">
+<style>
+  body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+  #calendar { max-width: 900px; margin: 40px auto; }
+  .badge {
+    position: absolute;
+    top: 2px;
+    right: 4px;
+    background: crimson;
+    color: #fff;
+    border-radius: 50%;
+    font-size: 12px;
+    width: 18px;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .fc-daygrid-day-frame { position: relative; }
+  .selected-day { outline: 3px solid dodgerblue; border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<div id="calendar"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const reservations = {
+    "2025-11-09": 5,
+    "2025-11-11": 2
+  };
+
+  const calendarEl = document.getElementById('calendar');
+  const todayStr = new Date().toISOString().split('T')[0];
+  let selectedCell = null;
+
+  const calendar = new FullCalendar.Calendar(calendarEl, {
+    initialView: 'dayGridMonth',
+    initialDate: todayStr,
+    dayCellContent: function(arg) {
+      const dateStr = arg.date.toISOString().split('T')[0];
+      let innerHtml = arg.dayNumberText;
+      if (reservations[dateStr]) {
+        innerHtml += `<span class="badge">${reservations[dateStr]}</span>`;
+      }
+      return { html: innerHtml };
+    },
+    dateClick: function(info) {
+      if (selectedCell) selectedCell.classList.remove('selected-day');
+      selectedCell = info.dayEl;
+      selectedCell.classList.add('selected-day');
+      alert(`Reservations for ${info.dateStr}: ${reservations[info.dateStr] || 0}`);
+    },
+    datesSet: function() {
+      // Highlight today's cell by default
+      const todayCell = calendarEl.querySelector(`[data-date="${todayStr}"]`);
+      if (todayCell && !selectedCell) {
+        todayCell.classList.add('selected-day');
+        selectedCell = todayCell;
+      }
+    }
+  });
+
+  calendar.render();
+});
+</script>
+
+</body>
+</html>
