@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://maps.googleapis.com" crossorigin>
   <link rel="preconnect" href="https://maps.gstatic.com" crossorigin>
   <!-- Styles: main.css imports base / navbar / drawer / hero / welcome (+ footer.css already imported by you) -->
-  <link rel="stylesheet" href="css/main.css" />
-  <link rel="stylesheet" href="/css/allform.css">
+  <link rel="stylesheet" href="../css/main.css" />
+  <link rel="stylesheet" href="../css/allform.css">
 </head>
 <body>
 
@@ -35,7 +35,7 @@
         <!-- Left: Logo + Brand -->
         <div class="nav-left">
           <a class="brand-logo" href="/" aria-label="AliPerLaLiberta Home">
-            <img src="logo.jpeg" alt="AliPerLaLiberta logo" decoding="async" />
+            <img src="../logo.jpeg" alt="AliPerLaLiberta logo" decoding="async" />
           </a>
           <span class="brand-name" data-i18n="nav.brand">AliPerLaLiberta</span>
         </div>
@@ -164,141 +164,56 @@
     </aside>
 
     <!-- Main Content -->
-    <main id="main" class="content" role="main">
+    <!-- Main CAF content -->
+<!-- Main CAF Content (fully isolated) -->
+<main id="cafMain" class="caf-section" role="main" data-page="caf">
+  <section class="caf-hero">
+    <div class="caf-hero-card">
+      <h1 data-i18n="caf.title">CAF (Centro di Assistenza Fiscale)</h1>
+      <p data-i18n="caf.desc">Assistenza semplice e veloce per le tue pratiche fiscali.</p>
 
-      <!-- Hero 1 — CAF -->
-      <section class="hero">
-        <div class="hero-card">
-          <h1 data-i18n="services.caf.title">CAF (Centro di Assistenza Fiscale)</h1>
-          <p data-i18n="services.caf.desc">
-            Ti aiutiamo con tutte le pratiche fiscali come dichiarazione dei redditi, ISEE, modelli 730, e altre procedure tributarie, in modo semplice e veloce.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="caf/" data-i18n="hero.cta.discover">Scopri il servizio</a>
-            <a class="btn btn-outline"
-               href="#"
-               data-share
-               data-share-url="caf/"
-               data-share-title="CAF (Centro di Assistenza Fiscale)"
-               data-share-text="Ti aiutiamo con tutte le pratiche fiscali in modo semplice e veloce."
-               data-i18n="hero.cta.share">
-              Condividi
-            </a>
-          </div>
+      <div class="caf-services-grid">
+        <div class="caf-service-card">
+          <h3>ISEE / DSU</h3>
+          <p data-i18n="caf.services.isee">Compilazione e invio della Dichiarazione Sostitutiva Unica.</p>
+          <button class="btn btn-caf-primary js-reservation-btn" data-service="ISEE / DSU" data-i18n="caf.button.book">Prenota ora</button>
         </div>
-      </section>
 
-      <!-- Hero 2 — Patronato -->
-      <section class="hero">
-        <div class="hero-card">
-          <h1 data-i18n="services.patronato.title">Patronato</h1>
-          <p data-i18n="services.patronato.desc">
-            Offriamo supporto per pensioni, indennità, disoccupazione e altre pratiche previdenziali o assistenziali con consulenza personalizzata.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="patronato/" data-i18n="hero.cta.discover">Scopri il servizio</a>
-            <a class="btn btn-outline"
-               href="#"
-               data-share
-               data-share-url="patronato/"
-               data-share-title="Patronato"
-               data-share-text="Supporto per pensioni, indennità e pratiche assistenziali con consulenza personalizzata."
-               data-i18n="hero.cta.share">
-              Condividi
-            </a>
-          </div>
+        <div class="caf-service-card">
+          <h3>Modello 730</h3>
+          <p data-i18n="caf.services.730">Dichiarazione dei redditi con assistenza professionale.</p>
+          <button class="btn btn-caf-primary js-reservation-btn" data-service="Modello 730" data-i18n="caf.button.book">Prenota ora</button>
         </div>
-      </section>
 
-      <!-- Hero 3 — Assistenza Legale -->
-      <section class="hero">
-        <div class="hero-card">
-          <h1 data-i18n="services.legal.title">Assistenza Legale / Supporto</h1>
-          <p data-i18n="services.legal.desc">
-            Un aiuto legale chiaro e accessibile per contratti, documenti, vertenze o problemi legati ai diritti del lavoro e civili.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="legalassistance/" data-i18n="hero.cta.discover">Scopri il servizio</a>
-            <a class="btn btn-outline"
-               href="#"
-               data-share
-               data-share-url="legalassistance/"
-               data-share-title="Assistenza Legale / Supporto"
-               data-share-text="Aiuto legale chiaro e accessibile per contratti e diritti del lavoro."
-               data-i18n="hero.cta.share">
-              Condividi
-            </a>
-          </div>
+        <div class="caf-service-card">
+          <h3>Modello Redditi</h3>
+          <p data-i18n="caf.services.redditi">Gestione completa per persone fisiche e autonomi.</p>
+          <button class="btn btn-caf-primary js-reservation-btn" data-service="Modello Redditi" data-i18n="caf.button.book">Prenota ora</button>
         </div>
-      </section>
 
-      <!-- Hero 4 — Corsi di Formazione -->
-      <section class="hero">
-        <div class="hero-card">
-          <h1 data-i18n="services.corsi.title">Corsi di Formazione🔴</h1>
-          <p data-i18n="services.corsi.desc">
-            Corsi professionali e aggiornamenti formativi per migliorare le competenze e trovare nuove opportunità di lavoro.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="corsiformazione/" data-i18n="hero.cta.discover">Scopri il servizio</a>
-            <a class="btn btn-outline"
-               href="#"
-               data-share
-               data-share-url="corsiformazione/"
-               data-share-title="Corsi di Formazione"
-               data-share-text="Corsi professionali e aggiornamenti per nuove opportunità di lavoro."
-               data-i18n="hero.cta.share">
-              Condividi
-            </a>
-          </div>
+        <div class="caf-service-card">
+          <h3>Modello RED</h3>
+          <p data-i18n="caf.services.red">Comunicazioni obbligatorie per pensionati e INPS.</p>
+          <button class="btn btn-caf-primary js-reservation-btn" data-service="Modello RED" data-i18n="caf.button.book">Prenota ora</button>
         </div>
-      </section>
 
-      <!-- Hero 5 — Creazione Siti Web -->
-      <section class="hero">
-        <div class="hero-card">
-          <h1 data-i18n="services.web.title">Creazione Siti Web🔴</h1>
-          <p data-i18n="services.web.desc">
-            Realizziamo siti web professionali e moderni per aziende, freelance o piccoli business, curando design e funzionalità.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="creazionesiti/" data-i18n="hero.cta.discover">Scopri il servizio</a>
-            <a class="btn btn-outline"
-               href="#"
-               data-share
-               data-share-url="creazionesiti/"
-               data-share-title="Creazione Siti Web"
-               data-share-text="Realizziamo siti web moderni per aziende e professionisti."
-               data-i18n="hero.cta.share">
-              Condividi
-            </a>
-          </div>
+        <div class="caf-service-card">
+          <h3>F24 / IMU</h3>
+          <p data-i18n="caf.services.f24">Calcolo e pagamento di imposte comunali e statali.</p>
+          <button class="btn btn-caf-primary js-reservation-btn" data-service="F24 / IMU" data-i18n="caf.button.book">Prenota ora</button>
         </div>
-      </section>
 
-      <!-- Hero 6 — Biglietti & E-Visa -->
-      <section class="hero">
-        <div class="hero-card">
-          <h1 data-i18n="services.biglietti.title">Biglietti & E-Visa Supporto🔴</h1>
-          <p data-i18n="services.biglietti.desc">
-            Prenotazioni per treni, autobus e aerei. Aiuto anche per ottenere eVisa per chi viaggia all’estero in modo rapido e sicuro.
-          </p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="biglietti/" data-i18n="hero.cta.discover">Scopri il servizio</a>
-            <a class="btn btn-outline"
-               href="#"
-               data-share
-               data-share-url="biglietti/"
-               data-share-title="Biglietti & E-Visa Supporto"
-               data-share-text="Prenotazioni per treni, bus, aerei e assistenza per eVisa internazionali."
-               data-i18n="hero.cta.share">
-              Condividi
-            </a>
-          </div>
+        <div class="caf-service-card">
+          <h3>Bonus & Incentivi</h3>
+          <p data-i18n="caf.services.bonus">Supporto per richiedere bonus e agevolazioni fiscali.</p>
+          <button class="btn btn-caf-primary js-reservation-btn" data-service="Bonus e Incentivi" data-i18n="caf.button.book">Prenota ora</button>
         </div>
-      </section>
+      </div>
+    </div>
+  </section>
+</main>
 
-    </main>
+
 
     <!-- ===== Site Footer (Contacts + Legal) ===== -->
     <footer class="site-footer" role="contentinfo">
@@ -493,7 +408,6 @@
   </div>
 </footer>
 
-
 <script src="../js/config.js" defer></script>
 <script src="../js/i18n.js" defer></script>
 <script src="../js/navbar.js" defer></script>
@@ -512,6 +426,8 @@
 <script src="../js/caf.js" defer></script>
 
 <script src="../js/share.js" defer></script>
+
+
 
 </body>
 </html>

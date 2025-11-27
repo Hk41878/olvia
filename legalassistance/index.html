@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://maps.gstatic.com" crossorigin>
   <!-- Styles: main.css imports base / navbar / drawer / hero / welcome (+ footer.css already imported by you) -->
   <link rel="stylesheet" href="../css/main.css" />
-  
+  <link rel="stylesheet" href="../css/allform.css">
 </head>
 <body>
 
@@ -416,20 +416,26 @@
   </div>
 </footer>
 
-<script src="/js/config.js"></script>
-<script src="/js/i18n.js"></script>
-<script src="/js/navbar.js"></script>
-<script src="/js/footer.js"></script>
 
-<script src="/js/countriesCode.js"></script>
-<script src="/js/welcome.js"></script>
-<!-- no page-specific JS needed -->
 
-<script src="/js/serverMan.js"></script>
-<script src="/js/statusBall.js"></script>
-<script src="/js/share.js"></script>
-<script src="/js/loadForm.js"></script>
-<script src="/js/reload.js"></script>
+<script src="../js/config.js" defer></script>
+<script src="../js/i18n.js" defer></script>
+<script src="../js/navbar.js" defer></script>
+<script src="../js/footer.js" defer></script>
+<script src="../js/welcome.js" defer></script>
+
+<!-- Server status + UI -->
+<script src="../js/serverMan.js" defer></script>
+<script src="../js/statusBall.js" defer></script>
+<script src="../js/reload.js" defer></script>
+
+<!-- Form Loader (Book Now handler) -->
+<script src="../js/loadForm.js" defer></script>
+
+<!-- Page-specific scripts -->
+<script src="../js/caf.js" defer></script>
+
+<script src="../js/share.js" defer></script>
 
 </body>
 </html>
