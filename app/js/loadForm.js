@@ -3,7 +3,7 @@
 // ==============================
 
 const ADVANCED_FORM_URL = "https://app.apll.it/js/advancedForm.js";
-const FALLBACK_FORM_URL = "https://itsnowonline.github.io/js/fallbackForm.js";
+const FALLBACK_FORM_URL = "../js/fallbackForm.js";
 
 let advancedFormLoaded = false;
 let fallbackFormLoaded = false;
