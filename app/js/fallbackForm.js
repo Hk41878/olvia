@@ -24,7 +24,7 @@ console.log("[fallbackForm] Loaded (OFFLINE PREMIUM VERSION)");
   // -----------------------------------------------------
   const link = document.createElement("link");
   link.rel = "stylesheet";
-  link.href = "/css/fallbackForm.css";
+  link.href = "../css/fallbackForm.css";
   document.head.appendChild(link);
 
   // -----------------------------------------------------
